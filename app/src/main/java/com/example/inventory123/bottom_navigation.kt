@@ -117,10 +117,12 @@ class bottom_navigation : AppCompatActivity(), comunicator {
 
         if (findEqual)
         {
-            bundle.putString("pelu","ID Equal, please input diferent ID")
+            bundle.putString("pelu","KO")
         }
         else
         {
+            bundle.putString("pelu","OK")
+
             peluchito.add(peluche)
         }
         fragmentAddNotify.arguments = bundle

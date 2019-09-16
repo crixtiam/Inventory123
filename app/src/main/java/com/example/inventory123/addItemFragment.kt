@@ -25,7 +25,7 @@ class addItemFragment: Fragment()
 
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_add_item, container, false)
-        var keySend = arguments?.getString("pelu")
+        var keySend = arguments?.getString("pelu").toString()
 
 
         root.btn_add.setOnClickListener{
@@ -33,6 +33,7 @@ class addItemFragment: Fragment()
             var nom = root.eName.text.toString()
             var pre = root.ePrice.text.toString()
             var cant = root.eStock.text.toString()
+
             if(ids.isEmpty() || nom.isEmpty() || pre.isEmpty() || cant.isEmpty()){
                 Toast.makeText(context, "Empty", Toast.LENGTH_SHORT).show()
             }else{
@@ -42,24 +43,23 @@ class addItemFragment: Fragment()
                 builder.setMessage("ID: $ids \nNombre: $nom \nPrecio: $pre \nCantidad $cant \n")
 
                 builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-                    Toast.makeText(context,"Agregado", Toast.LENGTH_SHORT).show()
                     interfaz?.addItem(ids,nom,pre,cant)
                     root.eId.text.clear()
                     root.eName.text.clear()
                     root.ePrice.text.clear()
                     root.eStock.text.clear()
 
-                    if(keySend == null || keySend.isEmpty()){
-                        Toast.makeText(context,"ID diferente ", Toast.LENGTH_LONG).show()
-                    }
-                    else
-                    {
-                        Toast.makeText(context,keySend.toString(), Toast.LENGTH_LONG).show()
+
+                    when(keySend){
+                        "KO"-> Toast.makeText(context,"ID Equal please change ID", Toast.LENGTH_LONG).show()
+                        "OK"->Toast.makeText(context,"Item Added", Toast.LENGTH_LONG).show()
+                        null-> Toast.makeText(context,"Item Null", Toast.LENGTH_LONG).show()
+
                     }
 
                 }
                 builder.setNegativeButton(android.R.string.no) { dialog, which ->
-                    Toast.makeText(context,"No Agregado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"No Added", Toast.LENGTH_SHORT).show()
                 }
                 builder.show()
 

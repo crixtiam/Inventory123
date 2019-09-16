@@ -27,17 +27,28 @@ class deleteItemFragment: Fragment() {
 
         root.btn_delete.setOnClickListener{
             var ids = root.eDeleteSearch.text.toString()
-            Log.d("Pelu",ids)
 
 
             if(ids.isEmpty() ){
                 Toast.makeText(context, "Empty", Toast.LENGTH_SHORT).show()
-            }else{
-                interfaz?.deleteItem(ids)
+            }
+            else{
 
-                Log.d("Pelu","entro else $ids")
+                val builder = AlertDialog.Builder(this.context)
+                builder.setTitle("ARE YOU SURE DELETE THIS ITEM?")
+                builder.setMessage("ID: $ids")
+                builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+                    interfaz?.deleteItem(ids)
+                    root.eDeleteSearch.text.clear()
+                    Toast.makeText(context,"Item Delete", Toast.LENGTH_SHORT).show()
 
 
+                }
+                builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                    Toast.makeText(context,"No Delete", Toast.LENGTH_SHORT).show()
+                }
+                builder.show()
                 }
 
         }

@@ -23,7 +23,7 @@ import java.util.Locale.filter
 class searchItemFragment : Fragment() {
 
     var interfaz : comunicator? = null
-    private lateinit var recyclerView: RecyclerView
+    //private lateinit var recyclerView: RecyclerView
 
 
     override fun onCreateView(
@@ -37,28 +37,22 @@ class searchItemFragment : Fragment() {
         var txtSetText =  view.textViewItem
 
 
-
-/*
-
-        var peluchito = arguments?.getParcelableArrayList<Peluches>("pelu")
-        peluchito?.toMutableList()
-        recyclerView  = view.findViewById(R.id.recycler)
+       /* var peluche = arguments?.getParcelableArrayList<Peluches>("pelu")
+        peluche!!.toMutableList()
+        recyclerView = view.findViewById(R.id.recycler)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this.context,RecyclerView.VERTICAL,false)
-
-        val searchPeluchesAdapter = searchItemAdapter(peluchito!!,this.requireContext())
-        recyclerView.adapter = searchPeluchesAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL,false)
 */
-
-
-
+       // val pelucheAdapter = inventoryAdapter(peluche,this.requireContext())
+       // recyclerView.adapter = pelucheAdapter
 
 
 
         var keySend = arguments?.getString("pelu")
 
         view.btn_search.setOnClickListener{
-           // var nombreb = view.eSearchItem.text.toString()
+
+         //   var nombreb = view.eSearchItem.text.toString()
             var eid2 = view.eSearchItem.text.toString()
 
             if (eid2.isEmpty()){
@@ -66,16 +60,15 @@ class searchItemFragment : Fragment() {
 
             }
             else
-            {   interfaz?.searchItem(eid2)
-
-           ///     searchPeluchesAdapter.filter.filter(nombreb)
+            {
+                interfaz?.searchItem(eid2)
+          //      pelucheAdapter.filter.filter(nombreb)
 
                 Log.d("pelu","esta en el else search")
             }
 
 
         }
-
 
         if (keySend==null || keySend.trim()==""){
             keyPrint="Item No encontrado"
